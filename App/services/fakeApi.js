@@ -134,7 +134,7 @@ export function getStories() {
               datetime: moment(moment().format('YYYY-MM-DD') + 'T11:34'),
               image:
                 'https://images.pexels.com/photos/1658967/pexels-photo-1658967.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-              seen: false,
+              seen: true,
             },
             {
               datetime: moment(moment().format('YYYY-MM-DD') + 'T10:34'),

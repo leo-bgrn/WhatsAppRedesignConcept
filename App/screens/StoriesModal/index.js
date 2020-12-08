@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Animated, Dimensions, StyleSheet} from 'react-native';
+import {View, Animated, Dimensions, StyleSheet, TouchableOpacity} from 'react-native';
 import {styles} from './styles';
 import Story from './Story';
 
@@ -91,12 +91,13 @@ class StoriesModal extends React.Component {
         </View>
         <Animated.ScrollView
           horizontal
-          style={StyleSheet.absoluteFillObject}
+          style={StyleSheet.absoluteFill}
           contentContainerStyle={{width: width * stories.length}}
           snapToInterval={width}
           decelerationRate={0.99}
           scrollEventThrottle={16}
           showsHorizontalScrollIndicator={false}
+          keyboardShouldPersistTaps='always'
           onScroll={Animated.event(
             [
               {

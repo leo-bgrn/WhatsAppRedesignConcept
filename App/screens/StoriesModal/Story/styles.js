@@ -51,4 +51,17 @@ export const styles = EStyleSheet.create({
   bottomContainer: {
     backgroundColor: 'yellow',
   },
+  touchableStoryCotnainer: {
+    backgroundColor: 'transparent',
+    flex: 1,
+    flexDirection: 'row'
+  },
+  previousStory:{
+    flex: 1,
+    backgroundColor: 'green'
+  },
+  nextStory: {
+    flex: 0.6,
+    backgroundColor: 'yellow'
+  }
 });

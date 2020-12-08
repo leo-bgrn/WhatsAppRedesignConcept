@@ -5,15 +5,22 @@ import {
   Text,
   SafeAreaView,
   ImageBackground,
-  Animated,
+  Animated, TouchableOpacity
 } from 'react-native';
 import {styles} from './styles';
 
 class Story extends React.Component {
   constructor(props) {
     super(props);
+    const storiesNotSeen = this.props.story.stories.filter(
+      (story) => !story.seen,
+    );
     this.state = {
       storyTimer: new Animated.Value(0),
+      storyToRender:
+        storiesNotSeen.length > 0
+          ? storiesNotSeen[0]
+          : this.props.story.stories[this.props.story.stories.length - 1],
     };
   }
 
@@ -34,15 +41,25 @@ class Story extends React.Component {
     this._startStoryTimer();
   }
 
+  onPressPreviousStory() {
+    console.log('Previous story');
+  }
+
+  onPressNextStory() {
+    console.log('Next story');
+  }
+
   render() {
     const {story} = this.props;
 
     return (
-      <SafeAreaView style={styles.mainContainer}>
+      <SafeAreaView
+        style={styles.mainContainer}
+        onPress={this.onPressPreviousStory}>
         <ImageBackground
           style={styles.imageBackground}
           imageStyle={{borderRadius: 15}}
-          source={{uri: story.stories[0].image}}>
+          source={{uri: this.state.storyToRender.image}}>
           <View style={styles.timerContainer}>
             <View style={styles.timerNotFilled}>
               <Animated.View
@@ -62,7 +79,7 @@ class Story extends React.Component {
             <View style={styles.nameContainer}>
               <Text style={styles.nameText}>{story.person.displayName}</Text>
               <Text style={styles.dateText}>
-                {story.stories[0].datetime.fromNow(true)}
+                {this.state.storyToRender.datetime.fromNow(true)}
               </Text>
             </View>
           </View>
