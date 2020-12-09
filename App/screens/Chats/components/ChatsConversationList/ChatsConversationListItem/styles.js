@@ -7,7 +7,6 @@ export const styles = EStyleSheet.create({
     flexShrink: 1,
     flex: 1,
   },
-  
   textContainer: {
     flexDirection: 'column',
     flexShrink: 1,
@@ -48,5 +47,4 @@ export const styles = EStyleSheet.create({
     color: '#B1B1B1',
     fontFamily: 'SFProText-Regular',
   },
-  
 });

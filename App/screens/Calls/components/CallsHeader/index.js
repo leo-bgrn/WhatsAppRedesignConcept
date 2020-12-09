@@ -6,12 +6,12 @@ import LinearGradient from 'react-native-linear-gradient';
 import {styles} from './styles';
 import IconLinearGradient from '/components/IconLinearGradient';
 
-class ChatsHeader extends React.Component {
+class CallsHeader extends React.Component {
   render() {
     return (
       <View style={styles.mainContainer}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Chats</Text>
+          <Text style={styles.title}>Calls</Text>
         </View>
         <View style={styles.addContactLogoContainer}>
           <IconLinearGradient>
@@ -27,4 +27,4 @@ class ChatsHeader extends React.Component {
   }
 }
 
-export default ChatsHeader;
+export default CallsHeader;

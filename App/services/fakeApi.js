@@ -182,3 +182,60 @@ export function getStories() {
     }, 500);
   });
 }
+
+export function getCalls() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve([
+        {
+          person: {
+            displayName: 'Jordan Moran',
+            profilPicture:
+              'https://images.pexels.com/photos/1484795/pexels-photo-1484795.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
+            isConnected: true,
+          },
+          datetime: moment(moment().format('YYYY-MM-DD') + 'T16:34'),
+          type: 'CALL',
+          missed: true,
+        },
+        {
+          person: {
+            displayName: 'Bae ❤️',
+            profilPicture:
+              'https://images.pexels.com/photos/906052/pexels-photo-906052.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
+            isConnected: false,
+          },
+          datetime: moment(moment().format('YYYY-MM-DD') + 'T11:34'),
+          type: 'VIDEO',
+          missed: false,
+        },
+        {
+          person: {
+            displayName: 'Austin Chandler',
+            profilPicture:
+              'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+            isConnected: true,
+          },
+          datetime: moment(
+            moment().subtract(1, 'd').format('YYYY-MM-DD') + 'T10:34',
+          ),
+          type: 'CALL',
+          missed: false,
+        },
+        {
+          person: {
+            displayName: 'Joshua Bailey',
+            profilPicture:
+              'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+            isConnected: false,
+          },
+          datetime: moment(
+            moment().subtract(1, 'd').format('YYYY-MM-DD') + 'T10:34',
+          ),
+          type: 'CALL',
+          missed: false,
+        },
+      ]);
+    });
+  });
+}
