@@ -1,4 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import {BOLD_FONT} from '/assets/styles/styles.js';
 
 export const styles = EStyleSheet.create({
   mainContainer: {
@@ -12,7 +13,7 @@ export const styles = EStyleSheet.create({
     marginLeft: '30rem',
   },
   title: {
-    fontFamily: 'SFProText-Bold',
+    fontFamily: BOLD_FONT,
     fontSize: '30rem',
   },
   addContactLogoContainer: {

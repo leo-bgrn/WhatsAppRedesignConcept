@@ -1,4 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import {MEDIUM_FONT, COLORS} from '/assets/styles/styles.js';
 
 export const styles = EStyleSheet.create({
   mainContainer: {
@@ -21,7 +22,6 @@ export const styles = EStyleSheet.create({
     aspectRatio: 1,
   },
   plusText: {
-    color: 'white',
     fontSize: '28rem',
   },
   nameView: {
@@ -30,8 +30,7 @@ export const styles = EStyleSheet.create({
     marginTop: '12rem',
   },
   nameText: {
-    fontFamily: 'SFProText-Medium',
-    color: '#B1B1B1',
+    fontFamily: MEDIUM_FONT,
     textAlign: 'center',
     fontSize: '13rem',
   },

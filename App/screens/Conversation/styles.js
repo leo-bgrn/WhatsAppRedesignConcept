@@ -1,20 +1,19 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {REGULAR_FONT} from '/assets/styles/styles.js';
 
 export const styles = EStyleSheet.create({
-  list: {
+  mainContainer: {
     flex: 1,
   },
   separator: {
     height: 1,
     width: '100%',
   },
-  lastItemContainer: {
-    height: '40rem',
+  loadingContainer: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  lastItemText: {
-    fontFamily: REGULAR_FONT,
+  messagesList: {
+    flex: 1,
   },
 });

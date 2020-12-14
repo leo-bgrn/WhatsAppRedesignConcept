@@ -15,7 +15,6 @@ export const styles = EStyleSheet.create({
     borderRadius: 2000,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
     margin: 0,
   },
   image: {

@@ -1,33 +1,29 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, ScrollView, SafeAreaView, Dimensions} from 'react-native';
 import {styles} from './styles';
 import CallsHeader from './components/CallsHeader';
 import {getCalls} from '/services/fakeApi';
 import CallsList from './components/CallsList';
 import LottieView from 'lottie-react-native';
+import {useTheme} from 'react-navigation';
+import {COLORS} from '/assets/styles/styles';
 
 const windowWidth = Dimensions.get('window').width;
 
-class Calls extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      calls: [],
-      isLoading: false,
-    };
-  }
+export default Calls = () => {
+  const [calls, setCalls] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const theme = useTheme();
 
-  _loadData() {
-    this.setState({isLoading: true});
+  _loadData = () => {
+    setIsLoading(true);
     getCalls().then((calls) => {
-      this.setState({
-        calls: calls,
-        isLoading: false,
-      });
+      setCalls(calls);
+      setIsLoading(false);
     });
-  }
+  };
 
-  _displayLoading() {
+  _displayLoading = () => {
     return (
       <View style={styles.loadingContainer}>
         <LottieView
@@ -38,24 +34,20 @@ class Calls extends React.Component {
         />
       </View>
     );
-  }
+  };
 
-  componentDidMount() {
-    this._loadData();
-  }
+  useEffect(() => {
+    _loadData();
+  }, []);
 
-  render() {
-    return (
-      <View style={styles.mainContainer}>
-        <SafeAreaView style={{flex: 1}}>
-          <CallsHeader />
-          <View style={styles.separator}></View>
-          {this.state.isLoading && this._displayLoading()}
-          {!this.state.isLoading && <CallsList calls={this.state.calls} />}
-        </SafeAreaView>
-      </View>
-    );
-  }
-}
-
-export default Calls;
+  return (
+    <View style={styles.mainContainer}>
+      <SafeAreaView style={{flex: 1}}>
+        <CallsHeader />
+        <View style={[styles.separator, {backgroundColor: COLORS[theme].grey4,}]}></View>
+        {isLoading && _displayLoading()}
+        {!isLoading && <CallsList calls={calls} />}
+      </SafeAreaView>
+    </View>
+  );
+};

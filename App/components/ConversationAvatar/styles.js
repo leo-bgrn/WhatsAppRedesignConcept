@@ -1,4 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import {COLORS} from '/assets/styles/styles.js'
 
 export const styles = EStyleSheet.create({
   avatarContainer: {
@@ -19,7 +20,6 @@ export const styles = EStyleSheet.create({
     left: 0,
     borderRadius: 1000,
     borderWidth: '3rem',
-    borderColor: 'white',
   },
   secondGroupAvatar: {
     borderRadius: 1000,
@@ -30,10 +30,8 @@ export const styles = EStyleSheet.create({
     right: 0,
     borderRadius: 1000,
     borderWidth: '3rem',
-    borderColor: 'white',
   },
   connectedBadgeContainer: {
-    backgroundColor: 'white',
     height: '18rem',
     width: '18rem',
     borderRadius: 1000,
@@ -44,7 +42,7 @@ export const styles = EStyleSheet.create({
     justifyContent: 'center',
   },
   connectedBadgeInside: {
-    backgroundColor: '#5CE27F',
+    backgroundColor: COLORS.common.green,
     height: '12rem',
     width: '12rem',
     borderRadius: 1000,

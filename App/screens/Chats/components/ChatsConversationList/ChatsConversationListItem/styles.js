@@ -1,4 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import {REGULAR_FONT, BOLD_FONT} from '/assets/styles/styles.js';
+
 export const styles = EStyleSheet.create({
   mainContainer: {
     flexDirection: 'row',
@@ -28,15 +30,14 @@ export const styles = EStyleSheet.create({
   },
   nameContainer: {},
   nameText: {
-    fontFamily: 'SFProText-Bold',
+    fontFamily: BOLD_FONT,
     fontSize: '15rem',
   },
   dateContainer: {
     marginRight: '15rem',
   },
   dateText: {
-    color: '#B1B1B1',
-    fontFamily: 'SFProText-Regular',
+    fontFamily: REGULAR_FONT,
   },
   messageContainer: {
     marginTop: '10rem',
@@ -44,7 +45,6 @@ export const styles = EStyleSheet.create({
   },
   messageText: {
     flexShrink: 1,
-    color: '#B1B1B1',
-    fontFamily: 'SFProText-Regular',
+    fontFamily: REGULAR_FONT,
   },
 });

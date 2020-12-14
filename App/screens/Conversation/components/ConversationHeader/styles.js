@@ -3,24 +3,23 @@ import {REGULAR_FONT, BOLD_FONT, COLORS} from '/assets/styles/styles.js';
 
 export const styles = EStyleSheet.create({
   mainContainer: {
-    flex: 1,
-    height: '90rem',
+    height: '50rem',
     flexDirection: 'row',
     alignItems: 'center',
-    flexShrink: 1,
+    marginBottom: '10rem',
   },
   avatarContainer: {
     margin: '15rem',
     aspectRatio: 1,
-    height: '60rem',
+    height: '45rem',
   },
   avatar: {
     borderRadius: 1000,
     aspectRatio: 1,
   },
   connectedBadgeContainer: {
-    height: '15rem',
-    width: '15rem',
+    height: '12rem',
+    width: '12rem',
     borderRadius: 1000,
     position: 'absolute',
     bottom: '0rem',
@@ -30,33 +29,43 @@ export const styles = EStyleSheet.create({
   },
   connectedBadgeInside: {
     backgroundColor: COLORS.common.green,
-    height: '10rem',
-    width: '10rem',
+    height: '8rem',
+    width: '8rem',
     borderRadius: 1000,
   },
+  firstGroupAvatar: {
+    borderRadius: 1000,
+    height: '35rem',
+    aspectRatio: 1,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    borderRadius: 1000,
+    borderWidth: '3rem',
+  },
+  secondGroupAvatar: {
+    borderRadius: 1000,
+    height: '30rem',
+    aspectRatio: 1,
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    borderRadius: 1000,
+    borderWidth: '3rem',
+  },
   textContainer: {
-    flex: 1,
-    marginLeft: '10rem',
+    flex: 4,
   },
-  nameContainer: {
-    marginBottom: '3rem',
-  },
+  nameContainer: {},
   nameText: {
     fontFamily: BOLD_FONT,
-    fontSize: '15rem',
+    fontSize: '17rem',
   },
-  typeContainer: {
+  onlineFromContainer: {
     marginTop: '3rem',
-    flexDirection: 'row',
-    alignItems: 'center',
   },
-  typeText: {
+  onlineFromText: {
     fontFamily: REGULAR_FONT,
-  },
-  dateContainer: {
-    marginRight: '15rem',
-  },
-  dateText: {
-    fontFamily: REGULAR_FONT,
+    fontSize: '15rem',
   },
 });

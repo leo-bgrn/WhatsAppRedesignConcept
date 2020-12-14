@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, SafeAreaView, Dimensions} from 'react-native';
 import {styles} from './styles';
 import {getConversations} from '/services/fakeApi';
@@ -8,41 +8,34 @@ import {getStories} from '/services/fakeApi';
 import ChatsStoriesList from './components/ChatsStoriesList/index';
 import StoriesModal from '../StoriesModal';
 import LottieView from 'lottie-react-native';
+import {useTheme} from 'react-navigation';
+import {COLORS} from '/assets/styles/styles';
 
 const windowWidth = Dimensions.get('window').width;
 
-class Chats extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      conversations: [],
-      isLoading: false,
-      stories: [],
-      showStoriesModal: false,
-    };
-    this.showStoriesModal = this.showStoriesModal.bind(this);
-  }
+export default Chats = ({navigation}) => {
+  const [conversations, setConversations] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [stories, setStories] = useState([]);
+  const [showStoriesModal, setShowStoriesModal] = useState(false);
+  const theme = useTheme();
 
-  showStoriesModal() {
-    this.setState({
-      showStoriesModal: !this.state.showStoriesModal,
-    });
-  }
+  showStoriesModalFunction = () => {
+    setShowStoriesModal(!showStoriesModal);
+  };
 
-  _loadData() {
-    this.setState({isLoading: true});
+  _loadData = () => {
+    setIsLoading(true);
     getConversations().then((conversations) => {
       getStories().then((stories) => {
-        this.setState({
-          conversations: conversations,
-          isLoading: false,
-          stories: stories,
-        });
+        setConversations(conversations);
+        setIsLoading(false);
+        setStories(stories);
       });
     });
-  }
+  };
 
-  _displayLoading() {
+  _displayLoading = () => {
     return (
       <View style={styles.loadingContainer}>
         <LottieView
@@ -53,36 +46,43 @@ class Chats extends React.Component {
         />
       </View>
     );
-  }
+  };
 
-  componentDidMount() {
-    this._loadData();
-  }
+  useEffect(() => {
+    _loadData();
+  }, []);
 
-  render() {
-    return (
-      <View style={styles.mainContainer}>
-        <SafeAreaView style={{flex: 1}}>
-          <ChatsHeader />
-          <View style={styles.separator}></View>
-          {this.state.isLoading && this._displayLoading()}
-          {!this.state.isLoading && (
-            <ChatsStoriesList
-              stories={this.state.stories}
-              onShowStoriesModal={this.showStoriesModal}
-            />
-          )}
-          {!this.state.isLoading && <View style={styles.separator}></View>}
-          {!this.state.isLoading && (
-            <ChatsConversationList conversations={this.state.conversations} />
-          )}
-        </SafeAreaView>
-        {this.state.showStoriesModal && (
-          <StoriesModal stories={this.state.stories} />
+  return (
+    <View style={styles.mainContainer}>
+      <SafeAreaView style={{flex: 1}}>
+        <ChatsHeader />
+        <View
+          style={[
+            styles.separator,
+            {backgroundColor: COLORS[theme].grey4},
+          ]}></View>
+        {isLoading && _displayLoading()}
+        {!isLoading && (
+          <ChatsStoriesList
+            stories={stories}
+            onShowStoriesModal={showStoriesModalFunction}
+          />
         )}
-      </View>
-    );
-  }
-}
-
-export default Chats;
+        {!isLoading && (
+          <View
+            style={[
+              styles.separator,
+              {backgroundColor: COLORS[theme].grey4},
+            ]}></View>
+        )}
+        {!isLoading && (
+          <ChatsConversationList
+            conversations={conversations}
+            navigation={navigation}
+          />
+        )}
+      </SafeAreaView>
+      {showStoriesModal && <StoriesModal stories={stories} />}
+    </View>
+  );
+};

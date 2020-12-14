@@ -5,26 +5,26 @@ import MaskedView from '@react-native-community/masked-view';
 import LinearGradient from 'react-native-linear-gradient';
 import {styles} from './styles';
 import IconLinearGradient from '/components/IconLinearGradient';
+import {useTheme} from 'react-navigation';
+import {COLORS} from '/assets/styles/styles';
 
-class ChatsHeader extends React.Component {
-  render() {
-    return (
-      <View style={styles.mainContainer}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Chats</Text>
-        </View>
-        <View style={styles.addContactLogoContainer}>
-          <IconLinearGradient>
-            <Icon
-              name="account-multiple-plus"
-              type="material-community"
-              size={35}
-            />
-          </IconLinearGradient>
-        </View>
+export default ChatsHeader = () => {
+  let theme = useTheme();
+
+  return (
+    <View style={styles.mainContainer}>
+      <View style={styles.titleContainer}>
+        <Text style={[styles.title, {color: COLORS[theme].grey1}]}>Chats</Text>
       </View>
-    );
-  }
-}
-
-export default ChatsHeader;
+      <View style={styles.addContactLogoContainer}>
+        <IconLinearGradient>
+          <Icon
+            name="account-multiple-plus"
+            type="material-community"
+            size={35}
+          />
+        </IconLinearGradient>
+      </View>
+    </View>
+  );
+};

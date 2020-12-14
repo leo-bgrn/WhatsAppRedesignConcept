@@ -1,4 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import {REGULAR_FONT, BOLD_FONT} from '/assets/styles/styles.js';
 
 export const styles = EStyleSheet.create({
   mainContainer: {
@@ -39,12 +40,12 @@ export const styles = EStyleSheet.create({
     marginLeft: '10rem',
   },
   nameText: {
-    fontFamily: 'SFProText-Bold',
+    fontFamily: BOLD_FONT,
     fontSize: '13rem',
     color: 'white',
   },
   dateText: {
-    fontFamily: 'SFProText-Regular',
+    fontFamily: REGULAR_FONT,
     fontSize: '12rem',
     color: 'white',
   },
@@ -54,14 +55,14 @@ export const styles = EStyleSheet.create({
   touchableStoryCotnainer: {
     backgroundColor: 'transparent',
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
-  previousStory:{
+  previousStory: {
     flex: 1,
-    backgroundColor: 'green'
+    backgroundColor: 'green',
   },
   nextStory: {
     flex: 0.6,
-    backgroundColor: 'yellow'
-  }
+    backgroundColor: 'yellow',
+  },
 });

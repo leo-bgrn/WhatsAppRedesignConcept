@@ -2,39 +2,58 @@ import React from 'react';
 import {FlatList, View, Text} from 'react-native';
 import ChatsConversationListItem from './ChatsConversationListItem/index';
 import {styles} from './styles';
+import {COLORS} from '/assets/styles/styles';
+import {useTheme} from 'react-navigation';
 
-class ChatsConversationList extends React.Component {
-  renderSeparator() {
-    return <View style={styles.separator}></View>;
-  }
+export default ChatsConversationList = (props) => {
+  let theme = useTheme();
+  renderSeparator = () => {
+    return (
+      <View
+        style={[
+          styles.separator,
+          {backgroundColor: COLORS[theme].grey4},
+        ]}></View>
+    );
+  };
 
-  renderLastItem() {
+  renderLastItem = () => {
     return (
       <View style={styles.lastItemContainer}>
-        <Text style={styles.lastItemText}>
+        <Text style={[styles.lastItemText, {color: COLORS[theme].grey3}]}>
           You doesn't have any other conversations
         </Text>
       </View>
     );
-  }
+  };
 
-  render() {
-    const data = [...this.props.conversations, 'LAST_ITEM'];
-    return (
-      <FlatList
-        style={styles.list}
-        data={data}
-        keyExtractor={(conversation) => data.indexOf(conversation).toString()}
-        renderItem={(conversation) => {
-          if (conversation.item === 'LAST_ITEM') {
-            return this.renderLastItem();
-          }
-          return <ChatsConversationListItem conversationItem={conversation} />;
-        }}
-        ItemSeparatorComponent={this.renderSeparator}
-      />
-    );
-  }
-}
+  displayConversation = (conversationId) => {
+    props.navigation.navigate('Conversation', {
+      conversationId: conversationId,
+    });
+  };
 
-export default ChatsConversationList;
+  const data = [...props.conversations, 'LAST_ITEM'];
+
+  return (
+    <FlatList
+      style={styles.list}
+      data={data}
+      keyExtractor={(conversation) =>
+        conversation !== 'LAST_ITEM' ? conversation.id : 'LAST'
+      }
+      renderItem={(conversation) => {
+        if (conversation.item === 'LAST_ITEM') {
+          return this.renderLastItem();
+        }
+        return (
+          <ChatsConversationListItem
+            conversationItem={conversation.item}
+            displayConversation={this.displayConversation}
+          />
+        );
+      }}
+      ItemSeparatorComponent={this.renderSeparator}
+    />
+  );
+};

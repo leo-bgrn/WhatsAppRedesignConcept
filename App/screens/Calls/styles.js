@@ -7,7 +7,6 @@ export const styles = EStyleSheet.create({
   separator: {
     height: 1,
     width: '100%',
-    backgroundColor: '#EFEFEF',
   },
   loadingContainer: {
     flex: 1,
