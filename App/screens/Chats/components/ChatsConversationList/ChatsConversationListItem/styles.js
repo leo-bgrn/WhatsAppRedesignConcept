@@ -1,5 +1,8 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {REGULAR_FONT, BOLD_FONT} from '/assets/styles/styles.js';
+import {REGULAR_FONT, BOLD_FONT, COLORS} from '/assets/styles/styles.js';
+import {Dimensions} from 'react-native';
+
+const {width} = Dimensions.get('window');
 
 export const styles = EStyleSheet.create({
   mainContainer: {
@@ -8,6 +11,7 @@ export const styles = EStyleSheet.create({
     alignItems: 'center',
     flexShrink: 1,
     flex: 1,
+    width: '100%',
   },
   textContainer: {
     flexDirection: 'column',
@@ -46,5 +50,16 @@ export const styles = EStyleSheet.create({
   messageText: {
     flexShrink: 1,
     fontFamily: REGULAR_FONT,
+  },
+  deleteSwipeableContainer: {
+    backgroundColor: COLORS.common.red,
+    width: width/6,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  optionsSwipeableContainer: {
+    width: width/6,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
