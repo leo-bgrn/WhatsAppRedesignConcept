@@ -18,7 +18,9 @@ export default ChatsStoriesListItem = ({story, onShowStoriesModal}) => {
             colors={[COLORS.common.gradientStart, COLORS.common.gradientEnd]}
             start={{x: 0, y: 1}}
             end={{x: 1, y: 0}}>
-            <Text style={[styles.plusText, {color: COLORS.light.grey5}]}>+</Text>
+            <Text style={[styles.plusText, {color: COLORS.light.grey5}]}>
+              +
+            </Text>
           </LinearGradient>
         </View>
         <View style={styles.nameView}>
@@ -35,7 +37,9 @@ export default ChatsStoriesListItem = ({story, onShowStoriesModal}) => {
     return this.renderFirstElement();
   }
   return (
-    <TouchableOpacity style={styles.mainContainer} onPress={onShowStoriesModal}>
+    <TouchableOpacity
+      style={styles.mainContainer}
+      onPress={() => onShowStoriesModal(index - 1)}>
       <StorieAvatar
         avatar={item.person.profilPicture}
         nbrNotSeen={

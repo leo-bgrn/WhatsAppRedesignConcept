@@ -125,6 +125,12 @@ export function getStories() {
                 'https://images.pexels.com/photos/1450082/pexels-photo-1450082.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
               seen: false,
             },
+            {
+              datetime: moment(moment().format('YYYY-MM-DD') + 'T16:34'),
+              image:
+                'https://images.pexels.com/photos/1658967/pexels-photo-1658967.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+              seen: false,
+            },
           ],
         },
         {

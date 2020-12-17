@@ -9,17 +9,14 @@ export const styles = EStyleSheet.create({
     flex: 1,
   },
   timerContainer: {
-    flexDirection: 'row',
-    margin: '8rem',
-    //backgroundColor: 'yellow',
+    height: '20rem',
   },
   timerNotFilled: {
     backgroundColor: '#B1B1B1',
-    margin: '2rem',
+    margin: '10rem',
     borderRadius: '100rem',
     flexDirection: 'row',
     height: '3rem',
-    flex: 1,
   },
   timerFilled: {
     backgroundColor: '#E1E1E1',

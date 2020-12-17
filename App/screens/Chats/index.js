@@ -17,10 +17,12 @@ export default Chats = ({navigation}) => {
   const [conversations, setConversations] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [stories, setStories] = useState([]);
+  const [storyToShow, setStoryToShow] = useState(0);
   const [showStoriesModal, setShowStoriesModal] = useState(false);
   const theme = useTheme();
 
-  showStoriesModalFunction = () => {
+  showStoriesModalFunction = (index) => {
+    setStoryToShow(index);
     setShowStoriesModal(!showStoriesModal);
   };
 
@@ -82,7 +84,13 @@ export default Chats = ({navigation}) => {
           />
         )}
       </SafeAreaView>
-      {showStoriesModal && <StoriesModal stories={stories} />}
+      {showStoriesModal && (
+        <StoriesModal
+          stories={stories}
+          onShowStoriesModal={showStoriesModalFunction}
+          storyToShow={storyToShow}
+        />
+      )}
     </View>
   );
 };

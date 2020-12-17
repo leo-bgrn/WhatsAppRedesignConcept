@@ -5,49 +5,104 @@ import {
   Text,
   SafeAreaView,
   ImageBackground,
-  Animated, TouchableOpacity
+  Animated,
 } from 'react-native';
 import {styles} from './styles';
 
 class Story extends React.Component {
   constructor(props) {
     super(props);
-    const storiesNotSeen = this.props.story.stories.filter(
-      (story) => !story.seen,
-    );
     this.state = {
-      storyTimer: new Animated.Value(0),
-      storyToRender:
-        storiesNotSeen.length > 0
-          ? storiesNotSeen[0]
-          : this.props.story.stories[this.props.story.stories.length - 1],
+      storyTimers: this.props.story.stories.map(() => new Animated.Value(0)),
+      storyToRenderIndex: 0,
     };
   }
 
-  _startStoryTimer() {
-    Animated.timing(this.state.storyTimer, {
-      toValue: 1,
-      duration: 5000,
-      useNativeDriver: false,
-    }).start();
-  }
-
-  resetAnimation = () => {
-    this.state.storyTimer.setValue(0);
-    this._startStoryTimer();
+  pauseStoryTimer = () => {
+    this.state.storyTimers[this.state.storyToRenderIndex].stopAnimation();
   };
 
-  componentDidMount() {
-    this._startStoryTimer();
+  resumeStoryTimer = () => {
+    const duration =
+      5000 - this.state.storyTimers[this.state.storyToRenderIndex]._value * 50;
+    Animated.timing(this.state.storyTimers[this.state.storyToRenderIndex], {
+      toValue: 100,
+      duration: duration,
+      useNativeDriver: false,
+    }).start(this.finishStoryTimer);
+  };
+
+  nextItem = () => {
+    for (let item of this.state.storyTimers) {
+      const index = this.state.storyTimers.indexOf(item);
+      if (index <= this.state.storyToRenderIndex) {
+        item.setValue(100);
+      } else {
+        item.setValue(0);
+      }
+    }
+    this.startStoryTimer(this.state.storyToRenderIndex + 1);
+    this.setState({
+      storyToRenderIndex: this.state.storyToRenderIndex + 1,
+    });
+  };
+
+  prevItem = () => {
+    for (let item of this.state.storyTimers) {
+      const index = this.state.storyTimers.indexOf(item);
+      if (index < this.state.storyToRenderIndex - 1) {
+        item.setValue(100);
+      } else {
+        item.setValue(0);
+      }
+    }
+
+    this.startStoryTimer(this.state.storyToRenderIndex - 1);
+    this.setState({
+      storyToRenderIndex: this.state.storyToRenderIndex - 1,
+    });
+  };
+
+  resetStoryTimer = () => {
+    this.state.storyTimers[this.state.storyToRenderIndex].setValue(0);
+  };
+
+  startStoryTimer = (storyToStart) => {
+    if (storyToStart == null) {
+      storyToStart = this.state.storyToRenderIndex;
+    }
+    Animated.timing(this.state.storyTimers[storyToStart], {
+      toValue: 100,
+      duration: 5000,
+      useNativeDriver: false,
+    }).start(this.finishStoryTimer);
+  };
+
+  renderStoryTimer(storyTimer, index) {
+    return (
+      <View style={styles.timerNotFilled} key={index}>
+        <Animated.View
+          style={[
+            styles.timerFilled,
+            {
+              width: storyTimer.interpolate({
+                inputRange: [0, 100],
+                outputRange: ['0%', '100%'],
+              }),
+            },
+          ]}></Animated.View>
+      </View>
+    );
   }
 
-  onPressPreviousStory() {
-    console.log('Previous story');
-  }
-
-  onPressNextStory() {
-    console.log('Next story');
-  }
+  finishStoryTimer = ({finished}) => {
+    if (!finished) return;
+    if (this.state.storyToRenderIndex !== this.props.story.stories.length - 1) {
+      this.nextItem();
+    } else {
+      this.props.nextStory();
+    }
+  };
 
   render() {
     const {story} = this.props;
@@ -59,15 +114,11 @@ class Story extends React.Component {
         <ImageBackground
           style={styles.imageBackground}
           imageStyle={{borderRadius: 15}}
-          source={{uri: this.state.storyToRender.image}}>
+          source={{uri: story.stories[this.state.storyToRenderIndex].image}}>
           <View style={styles.timerContainer}>
-            <View style={styles.timerNotFilled}>
-              <Animated.View
-                style={[
-                  styles.timerFilled,
-                  {flex: this.state.storyTimer},
-                ]}></Animated.View>
-            </View>
+            {this.state.storyTimers.map((item, index) =>
+              this.renderStoryTimer(item, index),
+            )}
           </View>
           <View style={styles.topContainer}>
             <View style={styles.avatarContainer}>
@@ -79,7 +130,9 @@ class Story extends React.Component {
             <View style={styles.nameContainer}>
               <Text style={styles.nameText}>{story.person.displayName}</Text>
               <Text style={styles.dateText}>
-                {this.state.storyToRender.datetime.fromNow(true)}
+                {story.stories[this.state.storyToRenderIndex].datetime.fromNow(
+                  true,
+                )}
               </Text>
             </View>
           </View>
