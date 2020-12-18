@@ -41,6 +41,8 @@ const CallsList = ({calls}) => {
         }
         return <CallsListItem call={call} />;
       }}
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
     />
   );
 };

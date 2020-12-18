@@ -16,6 +16,8 @@ export default ChatStoriesList = ({onShowStoriesModal, stories}) => {
             onShowStoriesModal={onShowStoriesModal}
           />
         )}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
       />
     </View>
   );

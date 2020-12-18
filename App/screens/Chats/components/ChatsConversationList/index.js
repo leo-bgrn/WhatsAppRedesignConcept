@@ -54,6 +54,8 @@ export default ChatsConversationList = (props) => {
         );
       }}
       ItemSeparatorComponent={this.renderSeparator}
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
     />
   );
 };
