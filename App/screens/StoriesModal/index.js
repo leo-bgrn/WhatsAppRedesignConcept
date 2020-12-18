@@ -84,7 +84,7 @@ const StoriesModal = ({stories, onShowStoriesModal, storyToShow}) => {
     return (
       activeStory !== 0 &&
       x._value < xTemp &&
-      (xTemp - x._value > width / 2 || vx > 1)
+      (xTemp - x._value > width / 2 || vx > 0.5)
     );
   };
 
@@ -124,7 +124,7 @@ const StoriesModal = ({stories, onShowStoriesModal, storyToShow}) => {
     return (
       activeStory !== stories.length - 1 &&
       x._value > xTemp &&
-      (x._value - xTemp > width / 2 || vx < -1)
+      (x._value - xTemp > width / 2 || vx < -0.5)
     );
   };
 
