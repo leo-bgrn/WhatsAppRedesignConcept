@@ -3,7 +3,7 @@ import {styles} from './styles';
 import {View, SafeAreaView, FlatList, KeyboardAvoidingView} from 'react-native';
 import {getConversationId} from '/services/fakeApi';
 import ConversationHeader from './components/ConversationHeader';
-import Texting from './components/Texting';
+import Texting from '/components/Texting';
 import Message from './components/Message';
 import {useTheme} from 'react-navigation';
 import {COLORS} from '/assets/styles/styles';

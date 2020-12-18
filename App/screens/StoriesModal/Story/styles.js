@@ -7,11 +7,11 @@ export const styles = EStyleSheet.create({
   },
   imageBackground: {
     flex: 1,
+    flexDirection: 'column',
   },
   timerContainer: {
     flexDirection: 'row',
     margin: '8rem',
-    //backgroundColor: 'yellow',
   },
   timerNotFilled: {
     backgroundColor: '#B1B1B1',
@@ -53,19 +53,6 @@ export const styles = EStyleSheet.create({
     color: 'white',
   },
   bottomContainer: {
-    backgroundColor: 'yellow',
-  },
-  touchableStoryCotnainer: {
-    backgroundColor: 'transparent',
-    flex: 1,
-    flexDirection: 'row',
-  },
-  previousStory: {
-    flex: 1,
-    backgroundColor: 'green',
-  },
-  nextStory: {
-    flex: 0.6,
-    backgroundColor: 'yellow',
+    marginBottom: '10rem',
   },
 });

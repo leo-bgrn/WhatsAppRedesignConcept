@@ -136,6 +136,7 @@ class Story extends React.Component {
               </Text>
             </View>
           </View>
+          <View style={{flex: 1}}></View>
           <View style={styles.bottomContainer}></View>
         </ImageBackground>
       </SafeAreaView>

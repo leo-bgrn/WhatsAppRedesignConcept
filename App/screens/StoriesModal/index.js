@@ -1,10 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {
-  Animated,
-  Dimensions,
-  StyleSheet,
-  PanResponder,
-} from 'react-native';
+import {Animated, Dimensions, StyleSheet, PanResponder} from 'react-native';
 import {styles} from './styles';
 import Story from './Story';
 
@@ -85,6 +80,14 @@ const StoriesModal = ({stories, onShowStoriesModal, storyToShow}) => {
     myRefs[activeStory].current.startStoryTimer();
   }, []);
 
+  swipeHorizontalLeadsToPrevStory = (vx) => {
+    return (
+      activeStory !== 0 &&
+      x._value < xTemp &&
+      (xTemp - x._value > width / 2 || vx > 1)
+    );
+  };
+
   prevStory = () => {
     if (activeStory !== 0) {
       Animated.timing(x, {
@@ -115,6 +118,14 @@ const StoriesModal = ({stories, onShowStoriesModal, storyToShow}) => {
     } else {
       myRefs[activeStory].current.prevItem();
     }
+  };
+
+  swipeHorizontalLeadsToNextStory = (vx) => {
+    return (
+      activeStory !== stories.length - 1 &&
+      x._value > xTemp &&
+      (x._value - xTemp > width / 2 || vx < -1)
+    );
   };
 
   nextStory = () => {
@@ -167,45 +178,44 @@ const StoriesModal = ({stories, onShowStoriesModal, storyToShow}) => {
     }
   };
 
+  onReleaseWithSwipeHorizontal = (vx) => {
+    setSwipeHorizontal(false);
+    if (swipeHorizontalLeadsToPrevStory(vx)) {
+      prevStory();
+    } else if (swipeHorizontalLeadsToNextStory(vx)) {
+      nextStory();
+    } else {
+      Animated.timing(x, {
+        toValue: xTemp,
+        duration: 500,
+        useNativeDriver: false,
+      }).start();
+    }
+    setXTemp(null);
+  };
+
+  onReleaseWithSwipeVertical = () => {
+    setSwipeVertical(false);
+    if (y._value > 50) {
+      onShowStoriesModal();
+    } else {
+      Animated.timing(y, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: false,
+      }).start();
+    }
+  };
+
   onRelease = (gestureState) => {
+    const {dx, dy, x0, y0, vx, vy} = gestureState;
     myRefs[activeStory].current.resumeStoryTimer();
     if (swipeHorizontal) {
-      setSwipeHorizontal(false);
-      if (
-        activeStory !== 0 &&
-        x._value < xTemp &&
-        xTemp - x._value > width / 2
-      ) {
-        prevStory();
-      } else if (
-        activeStory !== stories.length - 1 &&
-        x._value > xTemp &&
-        x._value - xTemp > width / 2
-      ) {
-        nextStory();
-      } else {
-        Animated.timing(x, {
-          toValue: xTemp,
-          duration: 500,
-          useNativeDriver: false,
-        }).start();
-      }
-      setXTemp(null);
-      return;
-    } else if (swipeVertical) {
-      setSwipeVertical(false);
-      if (y._value > 50) {
-        onShowStoriesModal();
-      } else {
-        Animated.timing(y, {
-          toValue: 0,
-          duration: 300,
-          useNativeDriver: false,
-        }).start();
-      }
-      return;
+      return onReleaseWithSwipeHorizontal(vx);
     }
-    const {dx, dy, x0, y0} = gestureState;
+    if (swipeVertical) {
+      return onReleaseWithSwipeVertical();
+    }
     if (Math.abs(dx) < 5 && Math.abs(dy) < 5) {
       if (x0 < width / 3) {
         onPrevItem();
@@ -217,8 +227,10 @@ const StoriesModal = ({stories, onShowStoriesModal, storyToShow}) => {
 
   const panResponder = React.useRef(
     PanResponder.create({
-      onStartShouldSetPanResponder: (evt, gestureState) => true,
-      onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
+      onStartShouldSetPanResponder: (evt, gestureState) =>
+        evt.nativeEvent.pageY < height - 162,
+      onStartShouldSetPanResponderCapture: (evt, gestureState) =>
+        evt.nativeEvent.pageY < height - 162,
       onMoveShouldSetPanResponder: (evt, gestureState) => true,
       onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
       onPanResponderGrant: (evt, gestureState) => {
