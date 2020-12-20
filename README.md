@@ -30,16 +30,20 @@ En plus de cela, un timer permet de changer de stories automatiques au bout de 5
 
 ### Swipeable 
 
-Grâce à ***React Native Gesture Handler***, il est possible d'ajouter les boutons d'options affichable grâce à un swipe à gauche sur les conversations.
+Grâce à ***React Native Gesture Handler***, il est possible d'ajouter les boutons d'options affichable grâce à un swipe à gauche sur les conversations. Plus d'information [ici](https://docs.swmansion.com/react-native-gesture-handler/docs/component-swipeable/)
 
 ![Swipeable](./external_resources/Images/Swipeable.png)
 
 
 
-### GIFs
+## GIFs
 
 ![App](./external_resources/GIFs/app.gif)
 
 ![ScreenNavigation](./external_resources/GIFs/ScreenNavigation.gif)
 
 ![Stories](./external_resources/GIFs/stories.gif)
+
+## Credits
+
+You will find the original design made by Paul TRUBAS here : https://www.behance.net/gallery/86147197/Whatsapp-Redesign-Concept
