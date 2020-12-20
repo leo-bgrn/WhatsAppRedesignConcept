@@ -32,9 +32,7 @@ En plus de cela, un timer permet de changer de stories automatiques au bout de 5
 
 Grâce à ***React Native Gesture Handler***, il est possible d'ajouter les boutons d'options affichable grâce à un swipe à gauche sur les conversations. Plus d'information [ici](https://docs.swmansion.com/react-native-gesture-handler/docs/component-swipeable/)
 
-![Swipeable](./external_resources/Images/Swipeable.png)
-
-
+<img src="./external_resources/Images/Swipeable.png" height="480">
 
 ## GIFs
 
